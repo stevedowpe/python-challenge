@@ -99,10 +99,16 @@ with open(csvpath_in, 'r', encoding="utf-8") as csvfile_in:
         SSN1.append(SSN[0])
         SSN2.append(SSN[1])
         SSN3.append(SSN[2])
+
+        # <<Steve Dow Note - Tried to get to print as indicated here, instead sent to output file>>: print(str(employee_id[row], first[row], last[row], month[row],"/", day[row], "/", year[row], "***-**-", SSN3[row])) 
     
+
 # Zip lists together
-cleaned_csv = zip(employee_id, first, last, month, day, year, SSN1, SSN2, SSN3)
+cleaned_csv = zip(employee_id, first, last, month, day, year, SSN3)
 print(cleaned_csv)
+
+#<<Steve Dow Note: - Tried to build in the ***-**>>: cleaned_csv_2 = zip(employee_id, first, last, month, day, year, "***-**-" + str(SSN3))
+#print(cleaned_csv_2)
 
 #Set variable for output file
 output_file = os.path.join("Dow_PyBoss_output.csv")
@@ -112,11 +118,10 @@ with open(output_file, "w", newline="") as datafile:
     writer = csv.writer(datafile)
 
     # Write the header row
-    writer.writerow(["Employee ID", "First Name", "Last Name", "Month", "Day", "Year", "SSN1", "SSN2", "SSN3"])
+    writer.writerow(["Employee ID", "First Name", "Last Name", "Month", "Day", "Year", "Last 4 of SSN"])
 
     # Write in zipped rows
     writer.writerows(cleaned_csv)
-
 
     
 
